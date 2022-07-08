@@ -59,6 +59,7 @@ export default function App() {
           fromDate={new Date(snapshotDateTimeString)}
           targetDate={new Date()}
         />
+        <h4>Ener new snapshot</h4>
         <input
           type="number"
           min="177"
