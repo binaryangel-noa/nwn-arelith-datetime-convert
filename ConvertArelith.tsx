@@ -1,16 +1,8 @@
 import { DateTime } from './types';
 import * as React from 'react';
 
-// const gameHourToRLHourLength = 1 / 3;
-// const gameDayToRLHourLength = 8;
-// const gameMonthLengthDays = 28;
-// const gameYearLengthDays = 336;
-
-const daysPerMonth = 28;
-const monthsPerYear = 12;
-const daysPerYear = daysPerMonth * monthsPerYear;
-
 const realworldToGameTimeConversion = 3;
+
 function overFlow(
   value: number,
   maxIntegerValue: number
