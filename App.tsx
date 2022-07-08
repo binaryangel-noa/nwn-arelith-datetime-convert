@@ -2,24 +2,105 @@ import * as React from 'react';
 import './style.css';
 import { DateTime } from './types';
 import { Convert } from './ConvertArelith';
+import useLocalStorageState from 'use-local-storage-state';
+
 export default function App() {
-  const currentDateTime = new Date(2022, 7 - 1, 8, 16, 15);
-  const destinationDateTime = new Date(2022, 7 - 1, 9, 15, 0);
-  const [arelithDT, setArelithDT] = React.useState<DateTime>({
+  const defaultDT = {
     year: 177,
     month: 1,
-    day: 15,
+    day: 1,
     hour: 0,
     minute: 0,
-  });
+  };
+
+  const [snapshotDateTime, setSnaphhotDateTime] = useLocalStorageState<string>(
+    'snapshot-date-time-2',
+    {
+      defaultValue: new Date().toJSON(),
+    }
+  );
+  const [arelithDT, setArelithDT] = useLocalStorageState<DateTime>(
+    'arelith-datetime-2',
+    {
+      defaultValue: defaultDT,
+    }
+  );
+
+  const [localArelithDT, setLocalArelithDT] = React.useState(arelithDT);
+
+  const onMakeSnapshot = React.useCallback(() => {
+    setArelithDT(localArelithDT);
+    setSnaphhotDateTime(new Date().toJSON());
+  }, [setArelithDT, localArelithDT]);
+
+  const onUpdateLocal = React.useCallback(
+    (dt: Partial<DateTime>) => {
+      setLocalArelithDT({
+        ...localArelithDT,
+        ...dt,
+      });
+    },
+    [setArelithDT, defaultDT]
+  );
+
+  const currentDateTime = new Date(2022, 7 - 1, 8, 16, 15);
+  const destinationDateTime = new Date(2022, 7 - 1, 9, 15, 0);
+
+  console.log('arelithDT++', arelithDT, localArelithDT);
   return (
     <div>
       <h1>Hello StackBlitz!</h1>
-      <Convert
-        arelithDate={arelithDT}
-        fromDate={currentDateTime}
-        targetDate={destinationDateTime}
-      />
+      <div>
+        <h3>
+          Arelith Date Time Snapshot (Year/Month/Day) Snapshoted:{' '}
+          {snapshotDateTime}
+          <br />
+        </h3>
+        <Convert
+          arelithDate={arelithDT ?? defaultDT}
+          fromDate={currentDateTime}
+          targetDate={destinationDateTime}
+        />
+        <input
+          type="number"
+          min="177"
+          value={localArelithDT.year}
+          onChange={(e) =>
+            onUpdateLocal({ year: e.currentTarget.valueAsNumber })
+          }
+        />
+        <input
+          type="number"
+          min="1"
+          max="12"
+          value={localArelithDT.month}
+          onChange={(e) =>
+            onUpdateLocal({ month: e.currentTarget.valueAsNumber })
+          }
+        />
+        <input
+          type="number"
+          min="1"
+          max="28"
+          value={localArelithDT.day}
+          onChange={(e) =>
+            onUpdateLocal({ day: e.currentTarget.valueAsNumber })
+          }
+        />
+        <input
+          type="time"
+          value={`${localArelithDT.hour < 10 ? '0' : ''}${
+            localArelithDT.hour
+          }:${localArelithDT.minute < 10 ? '0' : ''}${localArelithDT.minute}`}
+          onChange={(e) =>
+            onUpdateLocal({
+              hour: e.currentTarget.valueAsDate.getUTCHours(),
+              minute: e.currentTarget.valueAsDate.getUTCMinutes(),
+            })
+          }
+        />
+        <button onClick={onMakeSnapshot}>Save new snapshot</button>
+      </div>
       <h2>Archive</h2>
       <h2>Visual asserting</h2>
       Heute 22

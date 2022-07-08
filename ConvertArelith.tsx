@@ -32,9 +32,9 @@ export function Convert({
   fromDate: Date;
   targetDate: Date;
 }) {
-  console.log('arelithDate', arelithDate);
-  console.log('fromDate', fromDate);
-  console.log('targetDate', targetDate);
+  // console.log('arelithDate', arelithDate);
+  // console.log('fromDate', fromDate);
+  // console.log('targetDate', targetDate);
 
   let dateNow = fromDate;
   let rlHours = Math.abs(targetDate.getTime() - dateNow.getTime()) / 36e5;
@@ -78,7 +78,7 @@ export function Convert({
       timeLeft,
     }
   )}, Arelith target date: ${JSON.stringify({ targetArelithDate })}`;
-  console.log(stringy);
+  // console.log(stringy);
 
   return (
     <React.Fragment>
