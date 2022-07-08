@@ -13,12 +13,10 @@ export default function App() {
     minute: 0,
   };
 
-  const [snapshotDateTime, setSnaphhotDateTime] = useLocalStorageState<string>(
-    'snapshot-date-time-2',
-    {
+  const [snapshotDateTimeString, setSnaphhotDateTime] =
+    useLocalStorageState<string>('snapshot-date-time-2', {
       defaultValue: new Date().toJSON(),
-    }
-  );
+    });
   const [arelithDT, setArelithDT] = useLocalStorageState<DateTime>(
     'arelith-datetime-2',
     {
@@ -53,13 +51,13 @@ export default function App() {
       <div>
         <h3>
           Arelith Date Time Snapshot (Year/Month/Day) Snapshoted:{' '}
-          {snapshotDateTime}
+          {snapshotDateTimeString}
           <br />
         </h3>
         <Convert
-          arelithDate={arelithDT ?? defaultDT}
-          fromDate={currentDateTime}
-          targetDate={destinationDateTime}
+          arelithDate={arelithDT}
+          fromDate={new Date(snapshotDateTimeString)}
+          targetDate={new Date()}
         />
         <input
           type="number"
