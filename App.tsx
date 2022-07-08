@@ -50,7 +50,7 @@ export default function App() {
       <h1>Hello StackBlitz!</h1>
       <div>
         <h3>
-          Arelith Date Time Snapshot (Year/Month/Day) Snapshoted:{' '}
+          Arelith Date Time Snapshot (Year/Month/Day) Snapshoted
           {snapshotDateTimeString}
           <br />
         </h3>
