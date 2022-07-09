@@ -28,8 +28,8 @@ export function Convert({
   // console.log('fromDate', fromDate);
   // console.log('targetDate', targetDate);
 
-  let dateNow = fromDate;
-  let rlHours = Math.abs(targetDate.getTime() - dateNow.getTime()) / 36e5;
+  const dateNow = fromDate;
+  const rlHours = Math.abs(targetDate.getTime() - dateNow.getTime()) / 36e5;
   const arelithHoursTotal = rlHours * realworldToGameTimeConversion;
   const arelithDays = Math.floor(arelithHoursTotal / 24);
   let timeLeft = arelithHoursTotal - arelithDays * 24;
