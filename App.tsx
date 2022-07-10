@@ -3,6 +3,7 @@ import './style.css';
 import { DateTime } from './types';
 import { Convert } from './ConvertArelith';
 import useLocalStorageState from 'use-local-storage-state';
+import { convertArelith } from './convert-arelith';
 
 export default function App() {
   const defaultDT = {
@@ -41,9 +42,9 @@ export default function App() {
     [setArelithDT, defaultDT]
   );
 
-  const currentDateTime = new Date(2022, 7 - 1, 8, 16, 15);
-  const destinationDateTime = new Date(2022, 7 - 1, 9, 15, 0);
-
+  const snapshotDateTime = new Date(snapshotDateTimeString);
+  const now = new Date();
+  const targetDAtetime = convertArelith(arelithDT, snapshotDateTime, now);
   console.log('arelithDT++', arelithDT, localArelithDT);
   return (
     <div>
@@ -56,14 +57,14 @@ export default function App() {
         </h3>
         <Convert
           arelithDate={arelithDT}
-          fromDate={new Date(snapshotDateTimeString)}
-          targetDate={new Date()}
+          fromDate={snapshotDateTime}
+          targetDate={now}
         />
         <h4>Ener new snapshot</h4>
         <input
           type="number"
           min="177"
-          value={localArelithDT.year}
+          value={targetDAtetime.year}
           onChange={(e) =>
             onUpdateLocal({ year: e.currentTarget.valueAsNumber })
           }
@@ -72,7 +73,7 @@ export default function App() {
           type="number"
           min="1"
           max="12"
-          value={localArelithDT.month}
+          value={targetDAtetime.month}
           onChange={(e) =>
             onUpdateLocal({ month: e.currentTarget.valueAsNumber })
           }
@@ -81,16 +82,16 @@ export default function App() {
           type="number"
           min="1"
           max="28"
-          value={localArelithDT.day}
+          value={targetDAtetime.day}
           onChange={(e) =>
             onUpdateLocal({ day: e.currentTarget.valueAsNumber })
           }
         />
         <input
           type="time"
-          value={`${localArelithDT.hour < 10 ? '0' : ''}${
-            localArelithDT.hour
-          }:${localArelithDT.minute < 10 ? '0' : ''}${localArelithDT.minute}`}
+          value={`${targetDAtetime.hour < 10 ? '0' : ''}${
+            targetDAtetime.hour
+          }:${targetDAtetime.minute < 10 ? '0' : ''}${targetDAtetime.minute}`}
           onChange={(e) =>
             onUpdateLocal({
               hour: e.currentTarget.valueAsDate.getUTCHours(),
