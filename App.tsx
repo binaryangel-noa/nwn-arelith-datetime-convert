@@ -102,6 +102,13 @@ export default function App() {
       </div>
       <h2>Archive</h2>
       <h2>Visual asserting</h2>
+      Bugfixing
+      <Convert
+        arelithDate={arelithDT}
+        fromDate={new Date(snapshotDateTimeString)}
+        targetDate={new Date(2022, 7 - 1, 10, 10, 16)}
+      />
+      <hr />
       Heute 22
       <Convert
         arelithDate={{ year: 177, month: 1, day: 4, hour: 9, minute: 0 }}
