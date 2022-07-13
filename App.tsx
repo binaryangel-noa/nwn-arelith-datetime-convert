@@ -60,6 +60,7 @@ export default function App() {
           fromDate={snapshotDateTime}
           targetDate={now}
         />
+        {JSON.stringify(now)}
         <h4>Ener new snapshot</h4>
         <input
           type="number"
@@ -107,7 +108,7 @@ export default function App() {
       <Convert
         arelithDate={arelithDT}
         fromDate={new Date(snapshotDateTimeString)}
-        targetDate={new Date(2022, 7 - 1, 10, 10, 16)}
+        targetDate={new Date(2022, 7 - 1, 14, 1, 44)}
       />
       <hr />
       Heute 22
