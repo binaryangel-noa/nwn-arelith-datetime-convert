@@ -102,13 +102,20 @@ export default function App() {
         />
         <button onClick={onMakeSnapshot}>Save new snapshot</button>
       </div>
+      Autumn New Moon
+      <Convert
+        arelithDate={arelithDT}
+        fromDate={new Date(snapshotDateTimeString)}
+        targetDate={new Date(2022, 8 - 1, 28, 14, 45)}
+      />
+      <hr />
       <h2>Archive</h2>
       <h2>Visual asserting</h2>
       Bugfixing
       <Convert
         arelithDate={arelithDT}
         fromDate={new Date(snapshotDateTimeString)}
-        targetDate={new Date(2022, 7 - 1, 14, 1, 44)}
+        targetDate={new Date(2022, 9 - 1, 28, 14, 44)}
       />
       <hr />
       Heute 22
