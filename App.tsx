@@ -106,7 +106,7 @@ export default function App() {
       <Convert
         arelithDate={arelithDT}
         fromDate={new Date(snapshotDateTimeString)}
-        targetDate={new Date(2022, 9 - 1, 24, 21, 0)}
+        targetDate={new Date(2022, 9 - 1, 24, 19, 30)}
       />
       <hr />
       <h2>Archive</h2>
